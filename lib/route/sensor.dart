@@ -6,7 +6,8 @@ var sensorData = {
   "Humdidty": "30",
   "DoorsState": "open",
   "Location": "url",
-  "Alarms": "non"
+  "Alarms": "non",
+  "ID": "123452588"
 };
 
 class Sensor extends StatefulWidget {
@@ -20,29 +21,28 @@ class _SensorState extends State<Sensor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('smart railway'),
+      appBar: AppBar(
+        title: Text('smart railway'),
+      ),
+      body: GridView.count(
+        padding: EdgeInsets.only(
+          left: 30,
+          right: 30,
+          top: 20,
         ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.only(
-            left: 40,
-            right: 40,
-            top: 20,
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child:
-                  sensor_component(context, "assets/images/Group.png", "speed"),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: sensor_component(
-                  context, "assets/images/Vector.png", "lighting"),
-            )
-          ],
-        ));
+        crossAxisCount: 2,
+        crossAxisSpacing: 40,
+        mainAxisSpacing: 20,
+        children: [
+          sensor_component(context, "assets/images/Group.png", "speed"),
+          sensor_component(context, "assets/images/Vector.png", "lighting"),
+          sensor_component(context, "assets/images/humidty.png", "Humidty"),
+          sensor_component(context, "assets/images/door.png", "Doors state"),
+          sensor_component(context, "assets/images/location.png", "Location"),
+          sensor_component(context, "assets/images/alarm.png", "Alarms"),
+        ],
+      ),
+    );
   }
 }
 
@@ -67,11 +67,14 @@ Widget sensor_component(
           ),
         ),
       ],
-    ),
-    decoration: BoxDecoration(
+   
+      ),
+       decoration: BoxDecoration(
       color: Colors.grey[300],
       borderRadius: BorderRadius.circular(10),
     ),
     margin: EdgeInsets.all(7),
   );
-}
+  
+} 
+ 
