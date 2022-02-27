@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_railway/route/home.dart';
+import 'package:smart_railway/route/sensor.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      initialRoute: "/home",
+      routes: <String , WidgetBuilder>{
+       "/sensor" : (context) => Sensor(),
+       "/home" : (context) => Home()
+      },
     );
   }
 }

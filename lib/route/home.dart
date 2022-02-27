@@ -81,8 +81,10 @@ class _HomeState extends State<Home> {
             SizedBox(
               width: 350,
               child: ElevatedButton(
-                child: Text('Start' ),
-                onPressed: () {},
+                child: Text('Start'),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/sensor");
+                },
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
