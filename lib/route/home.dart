@@ -14,9 +14,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('smart railway'),
-      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +78,7 @@ class _HomeState extends State<Home> {
             SizedBox(
               width: 350,
               child: ElevatedButton(
-                child: Text('Start'),
+                child: Text('Login'),
                 onPressed: () {
                   Navigator.pushNamed(context, "/id");
                 },

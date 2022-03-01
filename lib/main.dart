@@ -8,17 +8,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: "/home",
-      routes: <String , WidgetBuilder>{
-       "/sensor" : (context) => Sensor(),
-       "/home" : (context) => Home(),
-       "/id" : (context) => Id()
-
+      routes: <String, WidgetBuilder>{
+        "/sensor": (context) => Sensor(),
+        "/home": (context) => Home(),
+        "/id": (context) => Id()
       },
     );
   }

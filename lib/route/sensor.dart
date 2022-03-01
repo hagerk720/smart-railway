@@ -22,7 +22,30 @@ class _SensorState extends State<Sensor> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('smart railway'),
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Smart',
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange[600]),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              'Railway',
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[500]),
+            ),
+          ],
+        ),
       ),
       body: GridView.count(
         padding: EdgeInsets.only(
@@ -67,14 +90,11 @@ Widget sensor_component(
           ),
         ),
       ],
-   
-      ),
-       decoration: BoxDecoration(
+    ),
+    decoration: BoxDecoration(
       color: Colors.grey[300],
       borderRadius: BorderRadius.circular(10),
     ),
     margin: EdgeInsets.all(7),
   );
-  
-} 
- 
+}

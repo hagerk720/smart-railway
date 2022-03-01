@@ -23,8 +23,32 @@ class Id extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('smart railway'),
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Smart',
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange[600]),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              'Railway',
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[500]),
+            ),
+          ],
+        ),
       ),
+      backgroundColor: Colors.white,
       body: ListView.separated(
         itemCount: entries.length,
         itemBuilder: (context, index) {
