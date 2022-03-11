@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
-var sensorData = {
-  "speed": "200 km/hr",
-  "lighting": "on",
-  "Humdidty": "30",
-  "DoorsState": "open",
-  "Location": "url",
-  "Alarms": "non",
-  "ID": "123452588"
-};
+import '../sensor_component.dart';
 
 class Sensor extends StatefulWidget {
   const Sensor({Key? key}) : super(key: key);
@@ -18,6 +10,15 @@ class Sensor extends StatefulWidget {
 }
 
 class _SensorState extends State<Sensor> {
+  var sensorData = {
+    "speed": "200 km/hr",
+    "lighting": "on",
+    "Humdidty": "30",
+    "DoorsState": "open",
+    "Location": "url",
+    "Alarms": "non",
+    "ID": "123452588"
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,44 +58,33 @@ class _SensorState extends State<Sensor> {
         crossAxisSpacing: 40,
         mainAxisSpacing: 20,
         children: [
-          sensor_component(context, "assets/images/Group.png", "speed"),
-          sensor_component(context, "assets/images/Vector.png", "lighting"),
-          sensor_component(context, "assets/images/humidty.png", "Humidty"),
-          sensor_component(context, "assets/images/door.png", "Doors state"),
-          sensor_component(context, "assets/images/location.png", "Location"),
-          sensor_component(context, "assets/images/alarm.png", "Alarms"),
+          sensor_component(
+            sensorData: sensorData["speed"],
+            sensorName: "speed",
+            imgURL: "assets/images/Group.png",
+          ),
+          sensor_component(
+            sensorData: sensorData["Humdidty"],
+            sensorName: "Humidty",
+            imgURL: "assets/images/humidty.png",
+          ),
+          sensor_component(
+            sensorData: sensorData["DoorsState"],
+            sensorName: "Doors state",
+            imgURL: "assets/images/door.png",
+          ),
+          sensor_component(
+            sensorData: sensorData["Location"],
+            sensorName: "Location",
+            imgURL: "assets/images/Group.png",
+          ),
+          sensor_component(
+            sensorData: sensorData["Alarms"],
+            sensorName: "Alarms",
+            imgURL: "assets/images/alarm.png",
+          ),
         ],
       ),
     );
   }
-}
-
-Widget sensor_component(
-    BuildContext context, String imgURL, String sensorName) {
-  return Container(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image(
-          image: AssetImage(imgURL),
-        ),
-        Text(
-          sensorName,
-          style: TextStyle(color: Colors.blue[400], fontSize: 20),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Text(
-            sensorData[sensorName].toString(),
-          ),
-        ),
-      ],
-    ),
-    decoration: BoxDecoration(
-      color: Colors.grey[300],
-      borderRadius: BorderRadius.circular(10),
-    ),
-    margin: EdgeInsets.all(7),
-  );
 }
