@@ -2,17 +2,21 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_railway/provider/login_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  late final LoginProvider provider;
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<LoginProvider>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -80,7 +84,12 @@ class _HomeState extends State<Home> {
               child: ElevatedButton(
                 child: Text('Login'),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/id");
+                  if (provider.state == loginState.initial) {
+                    provider.login("userName", "password");
+                  }
+                  else if(provider.state == loginState.loaded){
+                    Navigator.pushNamed(context, "/id");
+                  }
                 },
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_railway/provider/login_provider.dart';
 import 'package:smart_railway/route/home.dart';
 import 'package:smart_railway/route/id.dart';
 import 'package:smart_railway/route/sensor.dart';
@@ -12,7 +14,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => LoginProvider(),
+        ),
+        // ChangeNotifierProvider(
+        //   create: (_) => Id(),
+        // ),
+        // ChangeNotifierProvider(
+        //   create: (_) => Sensor(),
+        // ),
+     
+      ], 
+  child:  MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: "/home",
       routes: <String, WidgetBuilder>{
@@ -20,6 +35,7 @@ class MyApp extends StatelessWidget {
         "/home": (context) => Home(),
         "/id": (context) => Id()
       },
+    )
     );
   }
 }
