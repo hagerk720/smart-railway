@@ -1,6 +1,3 @@
-// ignore: file_names
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_railway/provider/login_provider.dart';
@@ -22,13 +19,13 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image(
+            const Image(
               image: AssetImage("assets/images/img.png"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
-            Text(
+            const Text(
               "Welcome Back",
               style: TextStyle(
                   fontSize: 20,
@@ -46,7 +43,7 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold,
                       color: Colors.orange[600]),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Text(
@@ -58,22 +55,22 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 5),
               child: TextField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Enter your username',
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 5),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 5),
               child: TextField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Enter your password',
                 ),
@@ -82,14 +79,15 @@ class _HomeState extends State<Home> {
             SizedBox(
               width: 350,
               child: ElevatedButton(
-                child: Text('Login'),
+                child: const Text('Login'),
                 onPressed: () {
-                  if (provider.state == loginState.initial) {
-                    provider.login("userName", "password");
-                  }
-                  else if(provider.state == loginState.loaded){
-                    Navigator.pushNamed(context, "/id");
-                  }
+                  // if (provider.state == loginState.initial) {
+                  //   provider.login("userName", "password");
+                  // }
+                  // else if(provider.state == loginState.loaded){
+                  //   Navigator.pushNamed(context, "/id");
+                  // }
+                  Navigator.pushNamed(context, "/id");
                 },
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

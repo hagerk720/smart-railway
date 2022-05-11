@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class sensor_component extends StatelessWidget {
+class SensorComponent extends StatelessWidget {
   final String? imgURL;
   final String? sensorName;
-  final String? sensorData;
-  sensor_component({this.sensorData, this.sensorName, this.imgURL});
+  final dynamic sensorData;
+  const SensorComponent( {Key? key, this.sensorData, this.sensorName, this.imgURL}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class sensor_component extends StatelessWidget {
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: EdgeInsets.all(7),
+      margin: const EdgeInsets.all(7),
     );
   }
 }

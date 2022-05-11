@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_railway/models/train_model.dart';
+import 'package:smart_railway/provider/id_provider.dart';
 
 class Id extends StatefulWidget {
   @override
@@ -6,27 +9,21 @@ class Id extends StatefulWidget {
 }
 
 class _IdState extends State<Id> {
-  final List<String> entries = [
-    'ID:123456789125                                                Normal',
-    'ID:123456789125                                                Normal',
-    'ID:123456789125                                                Normal',
-    'ID:123456789125                                                Warning',
-    'ID:123456789125                                                Normal',
-    'ID:123456789125                                                Warning',
-    'ID:123456789125                                                Normal',
-    'ID:123456789125                                                Normal'
-  ];
-
-  final List<int> colorcodes = [
-    100,
-    200,
-    300,
-    500,
-    600,
-  ];
+  List<TrainModel>? trains;
+  IdProvider? provider ;
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<IdProvider>(context);
+    if (provider!.state == IdState.initial) {
+      provider!.gettrains();
+      return Container(
+        color: Colors.white,
+      );
+    } else {
+      trains = provider!.trains;
+      provider!.state = IdState.initial;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -41,7 +38,7 @@ class _IdState extends State<Id> {
                   fontWeight: FontWeight.bold,
                   color: Colors.orange[600]),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Text(
@@ -56,7 +53,7 @@ class _IdState extends State<Id> {
       ),
       backgroundColor: Colors.white,
       body: ListView.separated(
-        itemCount: entries.length,
+        itemCount: trains!.length,
         itemBuilder: (context, index) {
           return InkWell(
             child: Container(
@@ -64,21 +61,39 @@ class _IdState extends State<Id> {
               height: 50,
               width: 100,
               color: Colors.grey[300],
-              child: Text(
-                entries[index],
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      trains![index].id.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      trains![index].alarm == true ? "Warning" : "normal",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
             ),
             onTap: () {
-              Navigator.pushNamed(context, "/sensor");
+              print(trains![index].id);
+              Navigator.pushNamed(context, "/sensor",
+                  arguments: trains![index].id);
             },
           );
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => const Divider(),
       ),
     );
   }
