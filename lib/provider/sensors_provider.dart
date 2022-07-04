@@ -8,8 +8,8 @@ class SensorsProvider with ChangeNotifier {
   SensorsState state = SensorsState.initial;
    final SensorsApi sensorsApi = SensorsApi();
   TrainModel? train;
-  void getTrainDetails(int trainId) async {
-    train = await sensorsApi.getTrainsById(trainId);
+  void getTrainDetails(int trainId,BuildContext context) async {
+    train = await sensorsApi.getTrainsById(trainId,context);
     if (train != null) {
       state = SensorsState.loaded;
     } else {

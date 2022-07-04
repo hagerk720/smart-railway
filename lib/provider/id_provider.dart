@@ -7,8 +7,8 @@ enum IdState { initial, loading, loaded, error }
 class IdProvider with ChangeNotifier {
   IdState state = IdState.initial;
   List<TrainModel>? trains; 
-  gettrains() async {
-    trains = await IdApi().gettrains();
+  gettrains(BuildContext context) async {
+    trains = await IdApi().gettrains(context);
      if (trains != null) {
       state = IdState.loaded;
     } else {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_railway/models/train_model.dart';
@@ -27,13 +28,7 @@ class _SensorState extends State<Sensor> {
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<SensorsProvider>(context);
-    if (provider!.state == SensorsState.initial) {
-      provider!.getTrainDetails(trainId!);
-      return const Center(child: CircularProgressIndicator());
-    } else if (provider!.state == SensorsState.loaded) {
-      trainModel = provider!.train;
-      provider!.state = SensorsState.initial;
-    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -61,48 +56,84 @@ class _SensorState extends State<Sensor> {
           ],
         ),
       ),
-      body: GridView.count(
-        padding: const EdgeInsets.only(
-          left: 30,
-          right: 30,
-          top: 20,
-        ),
-        crossAxisCount: 2,
-        crossAxisSpacing: 40,
-        mainAxisSpacing: 20,
-        children: [
-          SensorComponent(
-            sensorData: trainModel!.sensors!.speed,
-            sensorName: "speed",
-            imgURL: "assets/images/Group.png",
-          ),
-          SensorComponent(
-            sensorData: trainModel!.sensors!.humidity,
-            sensorName: "Humidty",
-            imgURL: "assets/images/humidty.png",
-          ),
-          SensorComponent(
-            sensorData: trainModel!.sensors!.doorState,
-            sensorName: "Doors state",
-            imgURL: "assets/images/door.png",
-          ),
-          SensorComponent(
-            sensorData: trainModel!.sensors!.gps,
-            sensorName: "Location",
-            imgURL: "assets/images/Group.png",
-          ),
-          SensorComponent(
-            sensorData: trainModel!.sensors!.temp,
-            sensorName: "Tempreture",
-            imgURL: "assets/images/alarm.png",
-          ),
-          SensorComponent(
-            sensorData: trainModel!.sensors!.lightState,
-            sensorName: "Light State",
-            imgURL: "assets/images/humidty.png",
-          ),
-        ],
-      ),
+      body:
+      StreamBuilder(
+          stream: Stream.periodic(const Duration(seconds: 2), (_) {
+            if(kDebugMode){
+              print('stream::');
+
+              provider!.getTrainDetails(trainId!,context);
+              // if (provider!.state == SensorsState.initial) {
+              //   provider!.getTrainDetails(trainId!,context);
+              //   return const Center(child: CircularProgressIndicator());
+              // } else if (provider!.state == SensorsState.loaded) {
+              //   trainModel = provider!.train;
+              //   provider!.state = SensorsState.initial;
+              // }
+            }
+          }),
+          builder: (ctx, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasData) {
+
+              return  GridView.count(
+                padding: const EdgeInsets.only(
+                  left: 30,
+                  right: 30,
+                  top: 20,
+                ),
+                crossAxisCount: 2,
+                crossAxisSpacing: 40,
+                mainAxisSpacing: 20,
+                children: [
+                  SensorComponent(
+                    sensorData: trainModel!.sensors!.speed,
+                    sensorName: "speed",
+                    imgURL: "assets/images/Group.png",
+                  ),
+                  SensorComponent(
+                    sensorData: trainModel!.sensors!.humidity,
+                    sensorName: "Humidty",
+                    imgURL: "assets/images/humidty.png",
+                  ),
+                  SensorComponent(
+                    sensorData: trainModel!.sensors!.doorState,
+                    sensorName: "Doors state",
+                    imgURL: "assets/images/door.png",
+                  ),
+                  SensorComponent(
+                    sensorData: trainModel!.sensors!.gps,
+                    sensorName: "Location",
+                    imgURL: "assets/images/Group.png",
+                  ),
+                  SensorComponent(
+                    sensorData: trainModel!.sensors!.temp,
+                    sensorName: "Tempreture",
+                    imgURL: "assets/images/alarm.png",
+                  ),
+                  SensorComponent(
+                    sensorData: trainModel!.sensors!.lightState,
+                    sensorName: "Light State",
+                    imgURL: "assets/images/humidty.png",
+                  ),
+                ],
+              );
+            }else{
+              return const Center(
+                child:  Text('No Data found ;('),
+              );
+            }
+          }
+      )
+
+
+
+
     );
   }
 }

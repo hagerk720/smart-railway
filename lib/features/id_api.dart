@@ -1,14 +1,23 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
 
 import 'package:smart_railway/models/train_model.dart';
+import 'package:smart_railway/provider/domain_url_provider.dart';
 
 class IdApi {
-  Future<List<TrainModel>?> gettrains() async {
+  Future<List<TrainModel>?> gettrains(BuildContext context) async {
     List<TrainModel> trains = [];
-    print("gettrains");
+    DomainUrlProvider provider = Provider.of<DomainUrlProvider>(context);
+    String baseURL = provider.url;
+    if(kDebugMode){
+
+      print("trians:::::$baseURL");
+    }
     var response = await http.get(
-      Uri.parse('http://c4ea-156-218-102-7.ngrok.io/allTrains'),
+      Uri.parse('$baseURL/allTrains'),
     );
     var jsonResponse = convert.jsonDecode(response.body);
     print(jsonResponse);
