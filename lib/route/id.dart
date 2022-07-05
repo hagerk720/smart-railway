@@ -10,19 +10,27 @@ class Id extends StatefulWidget {
 
 class _IdState extends State<Id> {
   List<TrainModel>? trains;
-  IdProvider? provider ;
+  //IdProvider provider = IdProvider();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
+    IdProvider provider = IdProvider();
     provider = Provider.of<IdProvider>(context);
-    if (provider!.state == IdState.initial) {
-      provider!.gettrains();
+    //provider.gettrains();
+
+    if (provider.state == IdState.initial) {
+      provider.gettrains();
       return Container(
         color: Colors.white,
       );
-    } else {
-      trains = provider!.trains;
-      provider!.state = IdState.initial;
+    } else if (provider.state == IdState.loaded) {
+      trains = provider.trains;
+
+      //print(trains);
     }
     return Scaffold(
       appBar: AppBar(

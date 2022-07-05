@@ -15,7 +15,7 @@ class Sensor extends StatefulWidget {
 class _SensorState extends State<Sensor> {
   SensorsProvider? provider ;
   TrainModel? trainModel;
-  int? trainId;
+  int trainId = 1;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -28,7 +28,7 @@ class _SensorState extends State<Sensor> {
   Widget build(BuildContext context) {
     provider = Provider.of<SensorsProvider>(context);
     if (provider!.state == SensorsState.initial) {
-      provider!.getTrainDetails(trainId!);
+      provider!.getTrainDetails(trainId);
       return const Center(child: CircularProgressIndicator());
     } else if (provider!.state == SensorsState.loaded) {
       trainModel = provider!.train;

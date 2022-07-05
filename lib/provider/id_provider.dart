@@ -6,19 +6,21 @@ enum IdState { initial, loading, loaded, error }
 
 class IdProvider with ChangeNotifier {
   IdState state = IdState.initial;
-  List<TrainModel>? trains; 
+  IdApi idApi = IdApi();
+  List<TrainModel>? trains;
   gettrains() async {
-    trains = await IdApi().gettrains();
-     if (trains != null) {
+    trains = await idApi.gettrains();
+    print(trains);
+    if (trains != null) {
       state = IdState.loaded;
     } else {
       state = IdState.error;
     }
+
     notifyListeners();
   }
 
-  IdApi idApi = IdApi();
-  
+  //IdApi idApi = IdApi();
 }
 
 class _IdState {}
