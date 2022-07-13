@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_railway/provider/login_provider.dart';
 
 class Home extends StatefulWidget {
@@ -11,9 +12,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late final LoginProvider provider;
 
+
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<LoginProvider>(context);
+
     return Scaffold(
       body: Center(
         child: Column(

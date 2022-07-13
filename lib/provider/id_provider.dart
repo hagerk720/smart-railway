@@ -21,4 +21,3 @@ class IdProvider with ChangeNotifier {
   
 }
 
-class _IdState {}
